@@ -1,4 +1,4 @@
-import { getTodaysLineScore, getBoxScore } from './nhlStats.mjs'
+import { getTodaysLineScore, getBoxScore } from './getNhlStats.mjs'
 
 const TEAM_NAME_MAPPING = {
     'Boston Bruins': 'BOS',
@@ -44,8 +44,6 @@ async function getTodaysGames() {
     })
 
     return results
-
-    const ress = await scrapeStatsForGameId(results[0].id)
 }
 
 async function getStatsForGame(game_id) {
@@ -80,8 +78,8 @@ export async function getFormattedNhlStats() {
 
         for (const stat of stats) {
             const playerRecord = {
-                PK: stat['id'].toString(),
-                SK: date,
+                pk: stat['id'].toString(),
+                sk: date,
                 goals: stat['goals'],
                 assists: stat['assists']
             }
@@ -91,27 +89,27 @@ export async function getFormattedNhlStats() {
 
         if (game.final) {
             const homeResult = {
-                PK: game['home_team'],
-                SK: date,
+                pk: game['home_team'],
+                sk: date,
                 //round_number: round_number,
                 wins: game['home_score'] > game['away_score'] ? 1 : 0,
                 losses: game['away_score'] > game['home_score'] ? 1 : 0,
                 shutouts: game['away_score'] === 0 ? 1 : 0
             }
-            if (homeResult.PK) {
+            if (homeResult.pk) {
                 recordsToSave.push(homeResult)
             }
 
             const awayResult = {
-                PK: game['away_team'],
-                SK: date,
+                pk: game['away_team'],
+                sk: date,
                 //round_number: round_number,
                 wins: game['away_score'] > game['home_score'] ? 1 : 0,
                 losses: game['home_score'] > game['away_score'] ? 1 : 0,
                 shutouts: game['home_score'] === 0 ? 1 : 0
             }
 
-            if (awayResult.PK) {
+            if (awayResult.pk) {
                 recordsToSave.push(awayResult)
             }
         }
