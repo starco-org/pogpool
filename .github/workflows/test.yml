@@ -32,20 +32,20 @@ jobs:
                   node-version: 19.6.0
             - run: npm i -g rise-infra
             - run: cd backend-infra && rise-infra deploy --stage=staging
-    # deploybackendcode:
-    #     runs-on: ubuntu-latest
-    #     needs: deploybackendinfra
-    #     steps:
-    #         - name: Configure AWS credentials
-    #           uses: aws-actions/configure-aws-credentials@v1
-    #           with:
-    #               aws-access-key-id: ${{ secrets.STAGING_AWS_KEY }}
-    #               aws-secret-access-key: ${{ secrets.STAGING_AWS_SECRET }}
-    #               aws-region: us-east-1
+    deploybackendcode:
+        runs-on: ubuntu-latest
+        needs: deploybackendinfra
+        steps:
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.STAGING_AWS_KEY }}
+                  aws-secret-access-key: ${{ secrets.STAGING_AWS_SECRET }}
+                  aws-region: us-east-1
 
-    #         - uses: actions/checkout@v3
-    #         - uses: actions/setup-node@v3
-    #           with:
-    #               node-version: 19.6.0
-    #         - run: npm i -g rise-functions
-    #         - run: cd backend-code && rise-functions deploy --stage=staging
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 19.6.0
+            - run: npm i -g rise-functions
+            - run: cd backend-code && rise-functions deploy --stage=staging

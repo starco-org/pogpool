@@ -3,13 +3,13 @@ import { getFormattedNhlStats } from './getFormattedNhlStats.mjs'
 export const config = {
     url: 'GET /stats',
     env: {
-        TABLE: '{@output.pogpool-backend-infradev.TableName}'
+        TABLE: '{@output.pogpool-backend-infrastaging.TableName}'
     },
     permissions: [
         {
             Effect: 'Allow',
             Action: ['dynamodb:BatchWriteItem'],
-            Resource: '{@output.pogpool-backend-infradev.TableArn}'
+            Resource: '{@output.pogpool-backend-infrastaging.TableArn}'
         }
     ]
 }
