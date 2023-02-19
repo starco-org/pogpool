@@ -12,7 +12,10 @@ export const config = {
         {
             Effect: 'Allow',
             Action: ['dynamodb:Scan'],
-            Resource: '{@output.pogpool-backend-infrastaging.TableArn}'
+            Resource: [
+                '{@output.pogpool-backend-infrastaging.TableArn}',
+                '{@output.pogpool-backend-infrastaging.TableArn}/*'
+            ]
         }
     ]
 }
