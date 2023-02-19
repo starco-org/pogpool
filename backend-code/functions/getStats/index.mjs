@@ -55,7 +55,10 @@ export const handler = async () => {
     return {
         statusCode: 200,
         body: JSON.stringify({
-            ok: true
+            ok: true,
+            status: `Recorded ${
+                data.length
+            } records into stats db for ${new Date().toDateString()}`
         })
     }
 }
