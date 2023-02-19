@@ -1,3 +1,3 @@
 export default {
-    name: 'pogpool-stats'
+    name: 'pogpool-backend-code'
 }

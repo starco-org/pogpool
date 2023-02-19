@@ -85,6 +85,7 @@ export async function formatData() {
                 goals: stat['goals'],
                 assists: stat['assists']
             }
+
             recordsToSave.push(playerRecord)
         }
 
