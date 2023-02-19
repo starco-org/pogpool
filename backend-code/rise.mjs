@@ -1,4 +1,3 @@
 export default {
-    type: 'functions',
-    name: 'nameOfMyProject'
+    name: 'pogpool-backend-code'
 }
