@@ -1,18 +1,21 @@
+import { getFormattedNhlStats } from './getFormattedNhlStats.mjs'
+
 export const config = {
     url: 'GET /stats',
     env: {
-        TABLE: '{@output.pogpool-infra.table}'
+        TABLE: '{@output.pogpool-backend-infradev.TableName}'
     },
     permissions: [
         {
             Effect: 'Allow',
             Action: ['dynamodb:BatchWriteItem'],
-            Resource: '{@output.pogpool-infra.table_arn}'
+            Resource: '{@output.pogpool-backend-infradev.TableArn}'
         }
     ]
 }
 
-const batchWrite = async (table, items) => {
+async function batchWrite(items) {
+    const table = process.env.TABLE
     const params = {
         RequestItems: {
             [table]: items.map((item) => ({
@@ -27,6 +30,9 @@ const batchWrite = async (table, items) => {
 }
 
 export const handler = async () => {
+    const data = await getFormattedNhlStats()
+    await batchWrite(data)
+
     return {
         statusCode: 200,
         body: JSON.stringify({

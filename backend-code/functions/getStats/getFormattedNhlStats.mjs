@@ -69,7 +69,7 @@ async function getStatsForGame(game_id) {
     return player_results
 }
 
-export async function formatData() {
+export async function getFormattedNhlStats() {
     const games = await getTodaysGames()
 
     let recordsToSave = []
