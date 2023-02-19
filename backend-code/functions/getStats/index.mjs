@@ -5,7 +5,6 @@ const dynamodb = new AWS.DynamoDB.DocumentClient({
 })
 
 export const config = {
-    url: 'GET /stats',
     env: {
         TABLE: '{@output.pogpool-backend-infrastaging.TableName}',
         NODE_OPTIONS: '--experimental-fetch'
