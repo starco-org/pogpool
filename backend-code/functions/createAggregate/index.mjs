@@ -12,17 +12,14 @@ export const config = {
         {
             Effect: 'Allow',
             Action: ['dynamodb:Scan'],
-            Resource: [
-                '{@output.pogpool-backend-infrastaging.TableArn}',
-                '{@output.pogpool-backend-infrastaging.TableArn}/*'
-            ]
+            Resource: '{@output.pogpool-backend-infrastaging.TableArn}'
         }
     ]
 }
 
 async function scanTable() {
     const params = {
-        TableName: config.env.TABLE
+        TableName: process.env.TABLE
     }
 
     const result = await dynamodb.scan(params).promise()
