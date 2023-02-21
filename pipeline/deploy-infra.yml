@@ -1,0 +1,10 @@
+version: 0.2
+phases:
+    install:
+        runtime-versions:
+            nodejs: 16
+    build:
+        commands:
+            - cd ./backend-infra
+            - npm i -g rise-infra
+            - AWS_ACCESS_KEY_ID=${AWS_KEY} AWS_SECRET_ACCESS_KEY=${AWS_SECRET} rise-infra deploy --stage=staging
